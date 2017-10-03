@@ -6,6 +6,9 @@ const request = require('request')
 const app = express()
 const http = require('http')
 
+const token = ""
+const wunderground_key =""
+
 const counties = {
         antrim: "uk/ballymena",
         armagh: "uk/craigavon",
@@ -141,7 +144,7 @@ var apiRequest = function(cb, county) {
         let httpRequestParams = {
                 host: "api.wunderground.com",
                 port: 80,
-                path: "/api/58f71e3757f75d4c/conditions/q/"+county+".json"
+                path: "/api/"+wunderground_key+"/conditions/q/"+county+".json"
         };
         let req = http.get(httpRequestParams, function(res)
         {
@@ -165,7 +168,6 @@ function getResponse(data) {
 
 }
 
-const token = ""
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
     request({
